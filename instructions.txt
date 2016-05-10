@@ -1,0 +1,105 @@
+
+CS 313E: Bulko
+Programming Assignment 10:
+Expression Tree
+Due Date: April 29, 11:59 pm
+
+In this assignment, you will read arithmetic expressions from an input file and create expression trees, structures that store the expressions using an infix traversal method. There are two kinds of data stored in an expression tree:
+
+    Operators are members of the set ['+', '-', '*', '/']. No other operators will be used in this homework assignment. Operators are stored in the tree's internal nodes.
+    Operands will be either integers or floating point numbers. Operands are stored in the tree's leaf nodes.
+
+All the operator nodes will have exactly two children.
+
+Additional Details
+
+For each expression, you will:
+
+    Store the expression in a tree structure.
+    Evaluate the expression using an infix traversal method, and print out the result.
+    Print out the expression in prefix form.
+    Print out the expression in postfix form.
+
+You must use a linked list implementation for your expression tree.
+
+You must use a stack to evaluate the expression tree.
+
+Your program should look like the following:
+
+     class Stack (object):
+
+     class BinaryTree (object):
+
+       def __init__ (self):
+
+       def createTree (self, expr):
+
+       def evaluate (self, root):
+
+       def preOrder (self, root):
+
+       def postOrder (self, root):
+
+     def main():
+
+     main()
+
+The classes Stack and BinaryTree should also contain any access methods we discussed in class that you need, such as push(), pop(), isEmpty(), peek(), size(), and __init__() for Stacks, and getLeftChild(), getRightChild(), setRootVal(), getRootVal, insertLeft(), and insertRight() for BinaryTrees.
+
+The method createTree() will take as an input parameter a string representing the infix expression. You can assume that the expression string is valid. createTree() will break the expression into tokens. There are four different kinds of tokens: "(", ")", an arithmetic operator, and an operand. Finally, createTree() will turn the list of tokens into a binary tree using a Stack.
+
+Here is the algorithm that you will use to process the tokens:
+
+    Start with a non-empty tree (that is, a tree with one node). Make the node the "current node".
+    If the current token is a ")", make the current node equal to the parent node, and pop the stack (only if it is not empty).
+    If the current token is a "(", add a new node as the left child of the current node. Push the current node on the stack and change the current node to the new node.
+    If the current token is an operator, set the current node's data value to the operator. Push the current node on the stack. Add a new node as the right child of the current node, and change the current node to the new node.
+    If the current token is an operand, set the current node's data value to the operand, make the current node equal to the parent, and pop the stack.
+
+After you've created the tree, evaluate() should traverse the tree using an infix tree traversal and print out the value of the expression.
+
+Finally, convert the infix expression into preorder and postorder form. Write two methods, preOrder() and postOrder() that does the conversions, and print out the results.
+
+Input:
+
+Save the attached file here as "treedata.txt". This file contains four lines or data representing four infix expressions for you to process.
+
+Two important things to note about the input file:
+
+    Each token is separated by a space from the next token, such as "( 3 + 5 )" instead of "(3+5)".
+    There is a pair of parentheses around each pair of operands, so that there is no ambiguity in the order of operations.
+
+Output:
+
+Your program should produce output similar to the following:
+
+Infix expression:  ( ( 8 + 3 ) * ( 7 - 2 ) )
+
+   Value:   55
+   Prefix expression:   * + 8 3 - 7 2
+   Postfix expression:   8 3 + 7 2 - *
+
+Infix expression:  ( ( 2.1 - 1.3 ) + ( 2.4 * ( 3.4 + 3.6 ) ) )
+
+   Value:   17.6
+   Prefix expression:   + - 2.1 1.3 * 2.4 + 3.4 3.6
+   Postfix expression:   2.1 1.3 - 2.4 3.4 3.6 + * +
+
+Infix expression:  ( 5 * 4 )
+
+   Value:   20
+   Prefix expression:   * 5 4
+   Postfix expression:   5 4 *
+
+Infix expression:  ( ( ( ( 3 * 4 ) / 2 ) / 3 ) * ( ( 4 - 2 ) + 3 ) )
+
+   Value:   10.0
+   Prefix expression:   * / / * 3 4 2 3 + - 4 2 3
+   Postfix expression:   3 4 * 2 / 3 / 4 2 - 3 + *
+
+General requirements:
+
+    You must submit a file called ExpressionTree.py via Canvas by the deadline shown at the top of this page.
+    As always, I will be looking for good documentation, descriptive variable names, clean logical structure, and adherence to all coding conventions expected of an experienced programmer; there will be penalties for failure to meet these standards.
+    Your code must compile and run before submission.
+    Don't forget to include the header (as described in previous assignments)!
